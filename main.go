@@ -10,12 +10,27 @@ import (
 
 const ZoneId = ":Zone.Identifier"
 
-func recursiveRemove(dir string) error {
-	files, err := filepath.Glob(filepath.Join(dir, "*"))
+type fileSearcher func(path string) ([]string, error)
+
+func recursiveFileSearch(path string) ([]string, error) {
+	files := make([]string, 0)
+
+	err := filepath.Walk(".",
+		func(path string, info os.FileInfo, err error) error {
+			if err != nil {
+				return err
+			}
+			files = append(files, path)
+			return nil
+		})
+	return files, err
+}
+
+func fileRemover(dir string, fn fileSearcher) error {
+	files, err := fn(dir)
 	if err != nil {
 		return err
 	}
-
 	for _, file := range files {
 		if strings.HasSuffix(file, ZoneId) {
 			err := os.Remove(file)
@@ -41,7 +56,7 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		recursiveRemove(dir)
+		fileRemover(dir, recursiveFileSearch)
 	}
 
 	fmt.Println("Done! 🍰")
