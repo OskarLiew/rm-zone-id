@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-const ZoneId = ":ZoneIdentifier"
+const ZoneId = ":Zone.Identifier"
 
 func recursiveRemove(dir string) error {
 	files, err := filepath.Glob(filepath.Join(dir, "*"))
