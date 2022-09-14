@@ -4,19 +4,15 @@ A simple command line utility that removes the `file:ZoneIdentifier` files that 
 
 ## Installation
 
-**Using `go get`**
+**Using `go install`**
 
-`$ go get github.com/OskarLiew/rm-zone-id`
+`$ go install github.com/OskarLiew/rm-zone-id@latest`
 
-**For Linux**
+**In you linux environment**
 
 Download the latest release of [rm-zone-id](https://github.com/OskarLiew/rm-zone-id/releases) and make sure it is executable. Then either add it to your path variable or to a directory on your path, e.g.
 
 `$ cp /path/to/rm-zone-id /usr/local/bin`
-
-**For Windows**
-
-TODO (You should be able to run the same executable as linux users)
 
 ## Usage
 
